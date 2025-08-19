@@ -33,11 +33,12 @@
 <body class="text-gray-800">
 
     <script type="module">
-        import { initializeFirebaseForAdmin, db, auth, appId, initialAuthToken } from './firebase-config.js';
+        import { initializeFirebase, db, auth, APP_ID } from './firebase-config.js';
         import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { addDoc, deleteDoc, onSnapshot, collection, query, doc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         let userId = null; // Variable to store the user's ID
+        let isAuthReady = false; // New variable to track Firebase Auth readiness
 
         const loginForm = document.getElementById('login-form');
         const adminDashboard = document.getElementById('admin-dashboard');
@@ -76,7 +77,7 @@
             // Fetch and display notes
             const notesAdminList = document.getElementById('notes-admin-list');
             notesAdminList.innerHTML = '<p class="text-center text-gray-500">Loading notes...</p>';
-            const notesQuery = query(collection(db, `artifacts/${appId}/public/data/notes`));
+            const notesQuery = query(collection(db, `artifacts/${APP_ID}/public/data/notes`));
             onSnapshot(notesQuery, (querySnapshot) => {
                 notesAdminList.innerHTML = '';
                 querySnapshot.forEach((doc) => {
@@ -94,7 +95,7 @@
             // Fetch and display updates
             const updatesAdminList = document.getElementById('updates-admin-list');
             updatesAdminList.innerHTML = '<p class="text-center text-gray-500">Loading updates...</p>';
-            const updatesQuery = query(collection(db, `artifacts/${appId}/public/data/updates`));
+            const updatesQuery = query(collection(db, `artifacts/${APP_ID}/public/data/updates`));
             onSnapshot(updatesQuery, (querySnapshot) => {
                 updatesAdminList.innerHTML = '';
                 querySnapshot.forEach((doc) => {
@@ -124,7 +125,7 @@
             const description = e.target.noteDescription.value;
             const link = e.target.noteLink.value;
             try {
-                await addDoc(collection(db, `artifacts/${appId}/public/data/notes`), { title, description, link });
+                await addDoc(collection(db, `artifacts/${APP_ID}/public/data/notes`), { title, description, link });
                 showNotification("Note added successfully!", 'success');
                 addNoteForm.reset();
             } catch (error) {
@@ -142,7 +143,7 @@
             const title = e.target.updateTitle.value;
             const description = e.target.updateDescription.value;
             try {
-                await addDoc(collection(db, `artifacts/${appId}/public/data/updates`), { title, description });
+                await addDoc(collection(db, `artifacts/${APP_ID}/public/data/updates`), { title, description });
                 showNotification("Update added successfully!", 'success');
                 addUpdateForm.reset();
             } catch (error) {
@@ -155,7 +156,7 @@
         window.deleteNote = async (noteId) => {
             if (!db || !userId) return;
             try {
-                await deleteDoc(doc(db, `artifacts/${appId}/public/data/notes`, noteId));
+                await deleteDoc(doc(db, `artifacts/${APP_ID}/public/data/notes`, noteId));
                 showNotification("Note deleted successfully!", 'success');
             } catch (error) {
                 console.error("Error deleting note:", error);
@@ -166,7 +167,7 @@
         window.deleteUpdate = async (updateId) => {
             if (!db || !userId) return;
             try {
-                await deleteDoc(doc(db, `artifacts/${appId}/public/data/updates`, updateId));
+                await deleteDoc(doc(db, `artifacts/${APP_ID}/public/data/updates`, updateId));
                 showNotification("Update deleted successfully!", 'success');
             } catch (error) {
                 console.error("Error deleting update:", error);
@@ -176,8 +177,9 @@
 
         // Initialize Firebase and set up auth listener
         window.onload = async () => {
-            await initializeFirebaseForAdmin();
+            initializeFirebase();
             onAuthStateChanged(auth, (user) => {
+                isAuthReady = true;
                 if (user) {
                     userId = user.uid;
                     loginForm.classList.add('hidden');
@@ -194,6 +196,10 @@
         // Event listener for login form submission
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (!isAuthReady) {
+                showNotification("Firebase not initialized yet. Please try again in a moment.", 'error');
+                return;
+            }
             const email = e.target.email.value;
             const password = e.target.password.value;
             try {
