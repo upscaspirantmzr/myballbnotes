@@ -15,7 +15,7 @@ const firebaseConfig = {
 };
 // This is the unique identifier for your app's data in Firestore.
 // It's important to use a consistent, unique string here.
-const APP_ID = "1:310299141154:web:86abc79f6468ea55b8567b";
+const APP_ID = 1:310299141154:web:86abc79f6468ea55b8567b;
 
 let db, auth;
 
