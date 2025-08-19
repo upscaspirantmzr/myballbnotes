@@ -16,7 +16,7 @@
         .card {
             background-color: #ffffff;
             border-radius: 1rem;
-            box-shadow: 0 4px 6px rgba[0, 0, 0, 0.1];
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .transition-all {
@@ -154,7 +154,8 @@
                     paperElement.innerHTML = `
                         <p class="font-semibold">${paper.semester} - ${paper.subject}</p>
                         <p class="text-sm text-gray-500">${paper.fileName}</p>
-                        <button onclick="deletePaper('${doc.id}')" class="text-red-500 hover:text-red-700 transition-all"><i class="fas fa-trash"></i></button>
+                        <a href="${paper.fileUrl}" target="_blank" class="text-blue-500 hover:underline">View</a>
+                        <button onclick="deletePaper('${doc.id}')" class="text-red-500 hover:text-red-700 transition-all ml-2"><i class="fas fa-trash"></i></button>
                     `;
                     papersAdminList.appendChild(paperElement);
                 });
@@ -386,7 +387,8 @@
         <!-- Login Form -->
         <div id="login-form" class="card p-8 w-full max-w-lg mx-auto">
             <h2 class="text-2xl font-bold text-center mb-6">Admin Login</h2>
-            <form id="login-form-inner">
+            <!-- IMPORTANT: The form method has been changed to "post" to prevent credentials from being exposed in the URL. -->
+            <form id="login-form-inner" method="post">
                 <div class="mb-4">
                     <label for="email" class="block text-gray-700 mb-2">Email</label>
                     <input type="email" id="email" name="email" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
