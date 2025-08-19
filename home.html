@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My BALLB Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+        }
+
+        .icon-bg-blue {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .icon-bg-green {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .icon-bg-purple {
+            background-color: #ede9fe;
+            color: #5b21b6;
+        }
+
+        .icon-bg-orange {
+            background-color: #fff7ed;
+            color: #c05621;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="assets/logo/jpg" alt="Logo" class="h-12 w-auto mr-4 rounded-full">
+                <h1 class="text-3xl font-bold text-gray-800">My BALLB Notes</h1>
+            </div>
+            <nav class="space-x-6 hidden md:flex">
+                <a href="index.html" class="text-gray-600 hover:text-blue-600 font-semibold transition-colors">Home</a>
+                <a href="notes.html" class="text-gray-600 hover:text-blue-600 font-semibold transition-colors">Notes</a>
+                <a href="papers.html" class="text-gray-600 hover:text-blue-600 font-semibold transition-colors">Question Papers</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto py-16 px-4">
+        <!-- Hero Section -->
+        <section class="text-center mb-20">
+            <div class="gradient-bg rounded-3xl p-16 text-white shadow-lg">
+                <h2 class="text-4xl md:text-6xl font-extrabold mb-4 animate-fadeInDown">Welcome to Your Legal Study Hub</h2>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto opacity-90 animate-fadeInUp">
+                    Access organized, high-quality notes and question papers to ace your BALLB studies. Excellence is just a click away.
+                </p>
+                <div class="mt-8 space-x-4">
+                    <a href="notes.html" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition-all transform hover:scale-105">Explore Notes</a>
+                    <a href="papers.html" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition-all transform hover:scale-105">View Papers</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-center mb-12">Portal Features</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-8 text-center hover-card">
+                    <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center icon-bg-blue">
+                        <i class="fas fa-book-reader text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">Comprehensive Notes</h4>
+                    <p class="text-gray-600">Access a wide range of topic-specific notes, meticulously prepared to cover every subject in your syllabus.</p>
+                </div>
+                <div class="card p-8 text-center hover-card">
+                    <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center icon-bg-green">
+                        <i class="fas fa-file-alt text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">Previous Year Papers</h4>
+                    <p class="text-gray-600">Prepare for exams by downloading and practicing with an extensive collection of past question papers.</p>
+                </div>
+                <div class="card p-8 text-center hover-card">
+                    <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center icon-bg-purple">
+                        <i class="fas fa-mobile-alt text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">Responsive Design</h4>
+                    <p class="text-gray-600">Our portal is fully optimized for all devices, so you can study anytime, anywhere, on your phone or tablet.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-8">
+        <div class="container mx-auto">
+            <p>&copy; 2024 My BALLB Notes. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
